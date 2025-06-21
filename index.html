@@ -40,11 +40,35 @@ src="https://www.facebook.com/tr?id=1214778790409319&ev=PageView&noscript=1"
            <h4 class="lasthead">⚡63/64 World Cup Toss Pass⚡</h4>
            <h4 class="lasthead">⚡59/61 Big Bash League Toss Pass⚡</h4>
            
-           <a href="https://t.me/+JmZMsvOLllM4N2Zl"><button class="btn" id="blinking-button"   onclick="fbq('track', 'Subscribe');">JOIN THE CHANNEL NOW</button></a>
+            <button class="btn" id="blinking-button">JOIN THE CHANNEL NOW</button>
         </div>
     </div>
 
+         <script>
+    // Prevent duplicate firing using a session flag
+    const pixelEventKey = 'subscribe_event_fired';
 
+    document.getElementById('blinking-button').addEventListener('click', function () {
+        if (!sessionStorage.getItem(pixelEventKey)) {
+            // Generate a unique event ID
+            const eventId = 'subscribe_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+
+            // Fire the Meta Pixel event with unique ID
+            fbq('track', 'Subscribe', {}, { eventID: eventId });
+
+            // Mark this session as fired
+            sessionStorage.setItem(pixelEventKey, 'true');
+
+            // Redirect after short delay
+            setTimeout(function () {
+                window.location.href = "https://t.me/+JmZMsvOLllM4N2Zl";
+            }, 200);
+        } else {
+            // Already fired, just redirect
+            window.location.href = "https://t.me/+JmZMsvOLllM4N2Zl";
+        }
+    });
+</script>
 <!--     <script>
         var timer = document.querySelector('.time');
         var bt = document.querySelector('.btn')
